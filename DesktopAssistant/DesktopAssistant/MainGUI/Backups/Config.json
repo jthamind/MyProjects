@@ -1,0 +1,21 @@
+{
+  "RemoteSupportTool": "\\\\unitrac-wh001\\E$\\Software\\ProdSupportTool",
+  "LocalSupportTool": "{USERPROFILE}\\Documents\\Software\\ProdSupportTool",
+  "LocalConfigs": "{USERPROFILE}\\Documents\\Software\\ProdSupportConfigs",
+  "WorkhorseServer": "unitrac-wh001",
+  "WorkhorseDirectoryPath": "\\e$\\AdminAppFiles\\HDTStorageTables\\",
+  "csvPath": "{USERPROFILE}\\Documents\\DesktopAssistant\\MainGUI\\servers.csv",
+  "TemplateFile": "{USERPROFILE}\\Documents\\Documentation\\NewTemplate\\DocTemplate.docx",
+  "DocumentationPath": "{USERPROFILE}\\Documents\\Documentation",
+  "TicketsPath": "{USERPROFILE}\\Documents\\Tickets",
+  "AddLenderToLFPServicesScript": "{USERPROFILE}\\Documents\\DesktopAssistant\\AddLendertoLFPServices\\AddLendertoLFPServices.ps1",
+  "SubmitFeedbackScript": "{USERPROFILE}\\Documents\\DesktopAssistant\\SubmitFeedback\\SubmitFeedback.ps1",
+  "StopLFPServicesQAScript": "{USERPROFILE}\\Documents\\DesktopAssistant\\AddLendertoLFPServices\\StopLFPServicesQA.ps1",
+  "StartLFPServicesQAScript": "{USERPROFILE}\\Documents\\DesktopAssistant\\AddLendertoLFPServices\\StartLFPServicesQA.ps1",
+  "UniTracTeamsWebhook": "https://alliedsolutions.webhook.office.com/webhookb2/669c6c22-249d-48cd-b144-7c714e815fa5@3f391ca2-df79-4f58-8b4d-a7e5d07645db/IncomingWebhook/5bc23939c1f84982a8b5f5e2193990d6/083d60d7-715b-4d4d-baaa-603c3634645a",
+  "TestingWebhook": "https://alliedsolutions.webhook.office.com/webhookb2/b694945f-40f4-4015-acb2-de534c439124@3f391ca2-df79-4f58-8b4d-a7e5d07645db/IncomingWebhook/a2b7df8757464c6ab08e6026235b808f/083d60d7-715b-4d4d-baaa-603c3634645a",
+  "AlliedIcon": "{USERPROFILE}\\Documents\\DesktopAssistant\\MainGUI\\AlliedIcon.ico",
+  "HelpBanner": "Disabled",
+  "HoverToolTips": "Disabled",
+  "DefaultUserTheme": "Sprite"
+}

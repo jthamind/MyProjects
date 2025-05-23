@@ -1,0 +1,22 @@
+{
+    "Environments": {
+        "QA": [
+            {"ComputerName": "UTQA2-APP2", "ServiceName": "LDHServicePRCPA"},
+            {"ComputerName": "UTQA2-APP4", "ServiceName": "MSGSRVREXTINFO"},
+            {"ComputerName": "UTQA2-APP2", "ServiceName": "LDHServiceEDI"},
+            {"ComputerName": "UTQA2-APP2", "ServiceName": "LDHServiceUSD"}
+        ],
+        "Staging": [
+            {"ComputerName": "UT-STGAPP-02", "ServiceName": "LDHServicePRCPA"},
+            {"ComputerName": "UTSTAGE-APP4", "ServiceName": "MSGSRVREXTINFO"},
+            {"ComputerName": "UT-STGAPP-02", "ServiceName": "LDHServiceEDI"},
+            {"ComputerName": "UT-STGAPP-02", "ServiceName": "LDHServiceUSD"}
+        ],
+        "Prod": [
+            {"ComputerName": "UNITRAC-WH004", "ServiceName": "LDHServicePRCPA"},
+            {"ComputerName": "UNITRAC-WH008", "ServiceName": "MSGSRVREXTINFO"},
+            {"ComputerName": "UNITRAC-WH002", "ServiceName": "LDHServiceEDI"},
+            {"ComputerName": "UNITRAC-WH002", "ServiceName": "LDHServiceUSD"}
+        ]
+    }
+}

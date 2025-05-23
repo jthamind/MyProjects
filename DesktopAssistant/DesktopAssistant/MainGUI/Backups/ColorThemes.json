@@ -1,0 +1,617 @@
+{
+  "Custom": {
+    "Functiontesting": {
+      "BackColor": "purple",
+      "ForeColor": "red",
+      "AccentColor": "green",
+      "DisabledColor": "pink",
+      "Quote": "this is for the function"
+    },
+    "ImitationML": {
+      "BackColor": "#230A04",
+      "ForeColor": "#CE450D",
+      "AccentColor": "#63CFDA",
+      "DisabledColor": "#FF8149",
+      "Quote": "this is a quote"
+    },
+    "newpink": {
+      "BackColor": "pink",
+      "ForeColor": "pink",
+      "AccentColor": "pink",
+      "DisabledColor": "pink",
+      "Quote": "pink"
+    },
+    "newpurple": {
+      "BackColor": "purple",
+      "ForeColor": "purple",
+      "AccentColor": "purple",
+      "DisabledColor": "purple",
+      "Quote": "purple"
+    },
+    "red": {
+      "BackColor": "red",
+      "ForeColor": "red",
+      "AccentColor": "red",
+      "DisabledColor": "red",
+      "Quote": "red"
+    },
+    "Sprite": {
+      "BackColor": "#008B47",
+      "ForeColor": "#F8CD24",
+      "AccentColor": "#6BB64A",
+      "DisabledColor": "gray",
+      "Quote": "It looks like Sprite more than Mellow Yellow!"
+    },
+    "yellow": {
+      "BackColor": "yellow",
+      "ForeColor": "yellow",
+      "AccentColor": "yellow",
+      "DisabledColor": "yellow",
+      "Quote": "yellow"
+    },
+    "Z": {
+      "BackColor": "red",
+      "ForeColor": "blue",
+      "AccentColor": "green",
+      "DisabledColor": "pink",
+      "Quote": "test"
+    }
+  },
+  "MLB": {
+    "Arizona Diamondbacks": {
+      "BackColor": "#5F259F",
+      "ForeColor": "#005F61",
+      "Quote": "Rattle On!"
+    },
+    "Atlanta Braves": {
+      "BackColor": "#CE1141",
+      "ForeColor": "#13274F",
+      "Quote": "For the A!"
+    },
+    "Baltimore Orioles": {
+      "BackColor": "#DF4601",
+      "ForeColor": "#000000",
+      "Quote": "Let's Go O's!"
+    },
+    "Boston Red Sox": {
+      "BackColor": "#BD3039",
+      "ForeColor": "#0C2340",
+      "Quote": "Red Sox Nation."
+    },
+    "Chicago Cubs": {
+      "BackColor": "#0E3386",
+      "ForeColor": "#CC3433",
+      "Quote": "Next Starts Here."
+    },
+    "Chicago White Sox": {
+      "BackColor": "#27251F",
+      "ForeColor": "#C4CED4",
+      "Quote": "South Side Hitmen."
+    },
+    "Cincinnati Reds": {
+      "BackColor": "#C6011F",
+      "ForeColor": "#000000",
+      "Quote": "The Big Red Machine."
+    },
+    "Cleveland Guardians": {
+      "BackColor": "#00385D",
+      "ForeColor": "#E50022",
+      "Quote": "We Stand for the Land."
+    },
+    "Colorado Rockies": {
+      "BackColor": "#333366",
+      "ForeColor": "#C4CED4",
+      "Quote": "Rox Solid."
+    },
+    "Detroit Tigers": {
+      "BackColor": "#0C2340",
+      "ForeColor": "#FA4616",
+      "Quote": "Who's Your Tiger?"
+    },
+    "Houston Astros": {
+      "BackColor": "#002D62",
+      "ForeColor": "#EB6E1F",
+      "Quote": "Ready2Reign."
+    },
+    "Kansas City Royals": {
+      "BackColor": "#004687",
+      "ForeColor": "#BD9B60",
+      "Quote": "Always Royal."
+    },
+    "Los Angeles Angels": {
+      "BackColor": "#003263",
+      "ForeColor": "#BA0021",
+      "Quote": "Let's Go Halos!"
+    },
+    "Los Angeles Dodgers": {
+      "BackColor": "#005A9C",
+      "ForeColor": "#A5ACAF",
+      "Quote": "Here to Play."
+    },
+    "Miami Marlins": {
+      "BackColor": "#00A3E0",
+      "ForeColor": "#EF3340",
+      "Quote": "Let's Go Fish!"
+    },
+    "Milwaukee Brewers": {
+      "BackColor": "#FFC52F",
+      "ForeColor": "#12284B",
+      "Quote": "This is My Crew."
+    },
+    "Minnesota Twins": {
+      "BackColor": "#002B5C",
+      "ForeColor": "#D31145",
+      "Quote": "This is Twins Territory."
+    },
+    "New York Yankees": {
+      "BackColor": "#C4CED3",
+      "ForeColor": "#0C2340",
+      "Quote": "Home of the Bronx Bombers. 27 World Series titles and counting."
+    },
+    "New York Mets": {
+      "BackColor": "#002D72",
+      "ForeColor": "#FF5910",
+      "Quote": "LFGM!"
+    },
+    "Oakland Athletics": {
+      "BackColor": "#003831",
+      "ForeColor": "#EFB21E",
+      "Quote": "Rooted in Oakland."
+    },
+    "Philadelphia Phillies": {
+      "BackColor": "#E81828",
+      "ForeColor": "#FFFFFF",
+      "Quote": "Ring the Bell!"
+    },
+    "Pittsburgh Pirates": {
+      "BackColor": "#27251F",
+      "ForeColor": "#FDB827",
+      "Quote": "Let's Go Bucs!"
+    },
+    "San Diego Padres": {
+      "BackColor": "#2F241D",
+      "ForeColor": "#FFC425",
+      "Quote": "Slam Diego!"
+    },
+    "San Francisco Giants": {
+      "BackColor": "#27251F",
+      "ForeColor": "#FD5A1E",
+      "Quote": "Nothing Like It."
+    },
+    "Seattle Mariners": {
+      "BackColor": "#0C2C56",
+      "ForeColor": "#005C5C",
+      "Quote": "True to the Blue."
+    },
+    "St Louis Cardinals": {
+      "BackColor": "#C41E3A",
+      "ForeColor": "#FEDB00",
+      "Quote": "Time to Fly!"
+    },
+    "Tampa Bay Rays": {
+      "BackColor": "#092C5C",
+      "ForeColor": "#8FBCE6",
+      "Quote": "Rays Up!"
+    },
+    "Texas Rangers": {
+      "BackColor": "#003278",
+      "ForeColor": "#C0111F",
+      "Quote": "Together We."
+    },
+    "Toronto Blue Jays": {
+      "BackColor": "#134A8E",
+      "ForeColor": "#1D2D5C",
+      "Quote": "Let's Go Blue Jays!"
+    },
+    "Washington Nationals": {
+      "BackColor": "#AB0003",
+      "ForeColor": "#14225A",
+      "Quote": "Natitude."
+    }
+  },
+  "NBA": {
+    "Atlanta Hawks": {
+      "BackColor": "#C8102E",
+      "ForeColor": "#FDB927",
+      "Quote": "True to Atlanta."
+    },
+    "Boston Celtics": {
+      "BackColor": "#007A33",
+      "ForeColor": "#BA9653",
+      "Quote": "Bleed Green."
+    },
+    "Brooklyn Nets": {
+      "BackColor": "#000000",
+      "ForeColor": "#FFFFFF",
+      "Quote": "We Go Hard."
+    },
+    "Charlotte Hornets": {
+      "BackColor": "#1D1160",
+      "ForeColor": "#00788C",
+      "Quote": "Buzz City."
+    },
+    "Chicago Bulls": {
+      "BackColor": "#CE1141",
+      "ForeColor": "#000000",
+      "Quote": "Home of the GOAT. See Red."
+    },
+    "Cleveland Cavaliers": {
+      "BackColor": "#860038",
+      "ForeColor": "#041E42",
+      "Quote": "Be the Fight."
+    },
+    "Dallas Mavericks": {
+      "BackColor": "#00538C",
+      "ForeColor": "#002B5E",
+      "Quote": "MFFL!"
+    },
+    "Denver Nuggets": {
+      "BackColor": "#0E2240",
+      "ForeColor": "#FEC524",
+      "Quote": "Mile High Basketball."
+    },
+    "Detroit Pistons": {
+      "BackColor": "#1D42BA",
+      "ForeColor": "#C8102E",
+      "Quote": "Different by Design."
+    },
+    "Golden State Warriors": {
+      "BackColor": "#1D428A",
+      "ForeColor": "#FFC72C",
+      "Quote": "Strength in Numbers."
+    },
+    "Houston Rockets": {
+      "BackColor": "#CE1141",
+      "ForeColor": "#C4CED4",
+      "Quote": "Run as One."
+    },
+    "Indiana Pacers": {
+      "BackColor": "#002D62",
+      "ForeColor": "#FDBB30",
+      "Quote": "We Grow Basketball Here."
+    },
+    "LA Clippers": {
+      "BackColor": "#C8102E",
+      "ForeColor": "#1D428A",
+      "Quote": "LA Our Way."
+    },
+    "Los Angeles Lakers": {
+      "BackColor": "#552583",
+      "ForeColor": "#FDB927",
+      "Quote": "Mamba Forever. 1/26/20"
+    },
+    "Memphis Grizzlies": {
+      "BackColor": "#5D76A9",
+      "ForeColor": "#12173F",
+      "Quote": "Grit and Grind."
+    },
+    "Miami Heat": {
+      "BackColor": "#98002E",
+      "ForeColor": "#F9A01B",
+      "Quote": "Heat Nation."
+    },
+    "Miami Vice Heat": {
+      "BackColor": "#41B6E6",
+      "ForeColor": "#DB3EB1",
+      "Quote": "Heat Nation."
+    },
+    "Milwaukee Bucks": {
+      "BackColor": "#00471B",
+      "ForeColor": "#EEE1C6",
+      "Quote": "Fear the Deer."
+    },
+    "Minnesota Timberwolves": {
+      "BackColor": "#0C2340",
+      "ForeColor": "#236192",
+      "Quote": "All Eyes North."
+    },
+    "New Orleans Pelicans": {
+      "BackColor": "#0C2340",
+      "ForeColor": "#C8102E",
+      "Quote": "Wont Bow Down."
+    },
+    "New York Knicks": {
+      "BackColor": "#006BB6",
+      "ForeColor": "#F58426",
+      "Quote": "Once a Knick, Always a Knick."
+    },
+    "Oklahoma City Thunder": {
+      "BackColor": "#007AC1",
+      "ForeColor": "#EF3B24",
+      "Quote": "Thunder Up."
+    },
+    "Orlando Magic": {
+      "BackColor": "#0077C0",
+      "ForeColor": "#C4CED4",
+      "Quote": "Magic Together."
+    },
+    "Philadelphia 76ers": {
+      "BackColor": "#006BB6",
+      "ForeColor": "#ED174C",
+      "Quote": "Trust the Process."
+    },
+    "Phoenix Suns": {
+      "BackColor": "#1D1160",
+      "ForeColor": "#E56020",
+      "Quote": "Welcome to the Valley."
+    },
+    "Portland Trail Blazers": {
+      "BackColor": "#E03A3E",
+      "ForeColor": "#000000",
+      "Quote": "Welcome to Rip City."
+    },
+    "Sacramento Kings": {
+      "BackColor": "#5A2D81",
+      "ForeColor": "#63727A",
+      "Quote": "Sacramento Proud."
+    },
+    "San Antonio Spurs": {
+      "BackColor": "#C4CED4",
+      "ForeColor": "#000000",
+      "Quote": "Go Spurs Go!"
+    },
+    "Toronto Raptors": {
+      "BackColor": "#CE1141",
+      "ForeColor": "#000000",
+      "Quote": "We The North."
+    },
+    "Utah Jazz": {
+      "BackColor": "#002B5C",
+      "ForeColor": "#00471B",
+      "Quote": "Take Note."
+    },
+    "Washington Wizards": {
+      "BackColor": "#002B5C",
+      "ForeColor": "#E31837",
+      "Quote": "Rep the District."
+    }
+  },
+  "NFL": {
+    "Arizona Cardinals": {
+      "BackColor": "#97233F",
+      "ForeColor": "#000000",
+      "Quote": "Red Sea!"
+    },
+    "Atlanta Falcons": {
+      "BackColor": "#A71930",
+      "ForeColor": "#000000",
+      "Quote": "Rise Up!"
+    },
+    "Baltimore Ravens": {
+      "BackColor": "#241773",
+      "ForeColor": "#000000",
+      "Quote": "Play Like a Raven!"
+    },
+    "Buffalo Bills": {
+      "BackColor": "#00338D",
+      "ForeColor": "#C60C30",
+      "Quote": "Where else would you rather be, than right here, right now?"
+    },
+    "Carolina Panthers": {
+      "BackColor": "#0085CA",
+      "ForeColor": "#101820",
+      "Quote": "Keep Pounding!"
+    },
+    "Chicago Bears": {
+      "BackColor": "#0B162A",
+      "ForeColor": "#C83803",
+      "Quote": "Bear Down!"
+    },
+    "Cincinnati Bengals": {
+      "BackColor": "#FB4F14",
+      "ForeColor": "#000000",
+      "Quote": "Who Dey?!"
+    },
+    "Cleveland Browns": {
+      "BackColor": "#311D00",
+      "ForeColor": "#FF3C00",
+      "Quote": "Dawg Pound!"
+    },
+    "Dallas Cowboys": {
+      "BackColor": "#041E42",
+      "ForeColor": "#869397",
+      "Quote": "How 'Bout Them Cowboys?!"
+    },
+    "Denver Broncos": {
+      "BackColor": "#002244",
+      "ForeColor": "#FB4F14",
+      "Quote": "United in Orange!"
+    },
+    "Detroit Lions": {
+      "BackColor": "#0076B6",
+      "ForeColor": "#B0B7BC",
+      "Quote": "One Pride!"
+    },
+    "Green Bay Packers": {
+      "BackColor": "#203731",
+      "ForeColor": "#FFB612",
+      "Quote": "Go Pack Go!"
+    },
+    "Houston Texans": {
+      "BackColor": "#03202F",
+      "ForeColor": "#A71930",
+      "Quote": "We Are Texans!"
+    },
+    "Indianapolis Colts": {
+      "BackColor": "#002C5F",
+      "ForeColor": "#FFFFFF",
+      "Quote": "Go Horse!"
+    },
+    "Jacksonville Jaguars": {
+      "BackColor": "#006778",
+      "ForeColor": "#101820",
+      "Quote": "DUUUVAL!"
+    },
+    "Kansas City Chiefs": {
+      "BackColor": "#E31837",
+      "ForeColor": "#FFB81C",
+      "Quote": "Chiefs Kingdom!"
+    },
+    "Las Vegas Raiders": {
+      "BackColor": "#000000",
+      "ForeColor": "#A5ACAF",
+      "Quote": "Just Win, Baby!"
+    },
+    "Los Angeles Chargers": {
+      "BackColor": "#0080C6",
+      "ForeColor": "#FFC20E",
+      "Quote": "Bolt Up!"
+    },
+    "Los Angeles Rams": {
+      "BackColor": "#003594",
+      "ForeColor": "#FFA300",
+      "Quote": "Rams House!"
+    },
+    "Miami Dolphins": {
+      "BackColor": "#008E97",
+      "ForeColor": "#FC4C02",
+      "Quote": "Fins Up!"
+    },
+    "Minnesota Vikings": {
+      "BackColor": "#4F2683",
+      "ForeColor": "#FFC62F",
+      "Quote": "Skol!"
+    },
+    "New England Patriots": {
+      "BackColor": "#002244",
+      "ForeColor": "#C60C30",
+      "Quote": "Do Your Job!"
+    },
+    "New Orleans Saints": {
+      "BackColor": "#D3BC8D",
+      "ForeColor": "#101820",
+      "Quote": "Who Dat?!"
+    },
+    "New York Giants": {
+      "BackColor": "#0B2265",
+      "ForeColor": "#A71930",
+      "Quote": "Big Blue!"
+    },
+    "New York Jets": {
+      "BackColor": "#125740",
+      "ForeColor": "#FFFFFF",
+      "Quote": "J-E-T-S! JETS, JETS, JETS!"
+    },
+    "Philadelphia Eagles": {
+      "BackColor": "#004C54",
+      "ForeColor": "#A5ACAF",
+      "Quote": "Fly, Eagles, Fly!"
+    },
+    "Pittsburgh Steelers": {
+      "BackColor": "#FFB612",
+      "ForeColor": "#101820",
+      "Quote": "Here we go, Steelers, here we go!"
+    },
+    "San Francisco 49ers": {
+      "BackColor": "#AA0000",
+      "ForeColor": "#B3995D",
+      "Quote": "Who's got it better than us? NOBODY!"
+    },
+    "Seattle Seahawks": {
+      "BackColor": "#002244",
+      "ForeColor": "#69BE28",
+      "Quote": "Go Hawks!"
+    },
+    "Tampa Bay Buccaneers": {
+      "BackColor": "#D50A0A",
+      "ForeColor": "#34302B",
+      "Quote": "Fire the Cannons!"
+    },
+    "Tennessee Titans": {
+      "BackColor": "#0C2340",
+      "ForeColor": "#4B92DB",
+      "Quote": "Titan Up!"
+    },
+    "Washington Commanders": {
+      "BackColor": "#5A1414",
+      "ForeColor": "#FFB612",
+      "Quote": "Hail to the Commanders!"
+    }
+  },
+  "Premium": {
+    "Bi Pride": {
+      "BackColor": "#0038A8",
+      "ForeColor": "#9B4F96",
+      "AccentColor": "#D60270",
+      "DisabledColor": "#A9A9A9",
+      "Quote": "If you play both teams, you'll always win."
+    },
+    "Candy Corn": {
+      "BackColor": "#FFA500",
+      "ForeColor": "#FFFFFF",
+      "AccentColor": "#FFCD55",
+      "DisabledColor": "#FFDAA5",
+      "Quote": "Also called 'the one that kinda looks like the hmmmmm emoji.'"
+    },
+    "Gruntilda": {
+      "BackColor": "#000000",
+      "ForeColor": "#7E42D6",
+      "AccentColor": "#4F983C",
+      "DisabledColor": "#7861D3",
+      "Quote": "It really does sound quite absurd, adventure of a bear and bird!"
+    },
+    "Jordan's Theme": {
+      "BackColor": "#F1F1F1",
+      "ForeColor": "#A3A3A3",
+      "AccentColor": "#FFFFFF",
+      "DisabledColor": "#D9D9D9",
+      "Quote": "Whatever you like is trash."
+    },
+    "Midnight Rose": {
+      "BackColor": "#474747",
+      "ForeColor": "#E8175D",
+      "AccentColor": "#A8A7A7",
+      "DisabledColor": "#CC527A",
+      "Quote": "IDK what to call this, I just like the colors. Feel free to submit feedback suggesting a new name."
+    },
+    "Mona Lisa": {
+      "BackColor": "#230A04",
+      "ForeColor": "#CE450D",
+      "AccentColor": "#63CFDA",
+      "DisabledColor": "#FF8149",
+      "Quote": "\"Just lookin' at the Hudson River right now, sittin' on the rocks/ Feelin' like my reflection's life reflection, is it not?\""
+    },
+    "PinkPrint": {
+      "BackColor": "#000000",
+      "ForeColor": "#A9408b",
+      "AccentColor": "#E394d0",
+      "DisabledColor": "#FDE1F6",
+      "Quote": "\"I’m with some hood girls lookin’ back at it/ and a good girl in my tax bracket\""
+    },
+    "PinkPrint Deluxe": {
+      "BackColor": "#FFFFFF",
+      "ForeColor": "#a9408b",
+      "AccentColor": "#e394d0",
+      "DisabledColor": "#FDE1F6",
+      "Quote": "\"I’m with some hood girls lookin’ back at it/ and a good girl in my tax bracket\""
+    },
+    "Trans Pride": {
+      "BackColor": "#5BCEFA",
+      "ForeColor": "#FFFFFF",
+      "AccentColor": "#F5A9B8",
+      "DisabledColor": "#A9A9A9",
+      "Quote": "Trans rights are human rights."
+    },
+    "USA": {
+      "BackColor": "#FFFFFF",
+      "ForeColor": "#002868",
+      "AccentColor": "#BF0A30",
+      "DisabledColor": "#F1F1F1",
+      "Quote": "'Murica!"
+    }
+  },
+  "Traditional": {
+    "Default Theme": {
+      "BackColor": "",
+      "ForeColor": ""
+    },
+    "Manny's Theme": {
+      "BackColor": "#000000",
+      "ForeColor": "#8A8A8A"
+    },
+    "Cotton Candy": {
+      "BackColor": "#FFBCD9",
+      "ForeColor": "#FF1493"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "Environments": {
+        "QA": [
+            {"ComputerName": "UTQA2-APP4", "ServiceName": "DirectoryWatcherServerIn"},
+            {"ComputerName": "UTQA2-APP4", "ServiceName": "DirectoryWatcherServerOut"},
+            {"ComputerName": "UTQA2-APP4", "ServiceName": "MSGSRVRDEF"}
+        ],
+        "Staging": [
+            {"ComputerName": "UTSTAGE-APP4", "ServiceName": "DirectoryWatcherIn"},
+            {"ComputerName": "UTSTAGE-APP4", "ServiceName": "DirectoryWatcherOut"},
+            {"ComputerName": "UTSTAGE-APP4", "ServiceName": "MSGSRVREXTDEF"}
+        ],
+        "Prod": [
+            {"ComputerName": "UNITRAC-WH007", "ServiceName": "DirectoryWatcherServerIn"},
+            {"ComputerName": "UNITRAC-WH007", "ServiceName": "DirectoryWatcherServerOut"},
+            {"ComputerName": "UNITRAC-WH008", "ServiceName": "MSGSRVRDEF"}
+        ]
+    }
+}

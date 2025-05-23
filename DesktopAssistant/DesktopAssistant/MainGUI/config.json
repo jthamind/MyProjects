@@ -1,0 +1,9 @@
+{
+    "RemoteEnvSelect": "\\\\unitrac-wh001\\E$\\Software\\ProdSupportEnvSelect",
+    "RemoteSupportTool": "\\\\unitrac-wh001\\E$\\Software\\ProdSupportTool",
+    "LocalSupportTool": "{USERPROFILE}\\OneDrive - Allied Solutions\\Documents\\Software\\ProdSupportTool",
+    "LocalEnvSelect": "{USERPROFILE}\\OneDrive - Allied Solutions\\Documents\\Software\\ProdSupportEnvSelect",
+    "RemoteConfigs": "\\\\unitrac-wh001\\E$\\AdminAppFiles\\ProdSupportConfigs",
+    "LocalConfigs": "{USERPROFILE}\\OneDrive - Allied Solutions\\Documents\\Software\\ProdSupportConfigs",
+	"csvPath": "{USERPROFILE}\\OneDrive - Allied Solutions\\Documents\\Documentation\\servers.csv"
+}

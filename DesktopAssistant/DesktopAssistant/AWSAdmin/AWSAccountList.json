@@ -1,0 +1,304 @@
+{
+    "accountList": [
+        {
+            "accountId": "616260251372",
+            "accountName": "pims-prd",
+            "emailAddress": "awspimsprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "851374529527",
+            "accountName": "security-tst",
+            "emailAddress": "awssecuritytst@alliedsolutions.net"
+        },
+        {
+            "accountId": "010749561698",
+            "accountName": "ocr-dev",
+            "emailAddress": "awsocrdev@alliedsolutions.net"
+        },
+        {
+            "accountId": "217050559700",
+            "accountName": "iqq-tst",
+            "emailAddress": "awsiqqtst@alliedsolutions.net"
+        },
+        {
+            "accountId": "229464464490",
+            "accountName": "claims-dev",
+            "emailAddress": "awsclaimsdev@alliedsolutions.net"
+        },
+        {
+            "accountId": "584068305723",
+            "accountName": "app-shared-stg",
+            "emailAddress": "awsappsharedstg@alliedsolutions.net"
+        },
+        {
+            "accountId": "590183838932",
+            "accountName": "infrastructure-shared-tst",
+            "emailAddress": "awsinfrastructuresharedtst@alliedsolutions.net"
+        },
+        {
+            "accountId": "831825868234",
+            "accountName": "claims-stg",
+            "emailAddress": "awsclaimsstg@alliedsolutions.net"
+        },
+        {
+            "accountId": "293433428471",
+            "accountName": "ibm-stg",
+            "emailAddress": "awsibmstg@alliedsolutions.net"
+        },
+        {
+            "accountId": "937551361133",
+            "accountName": "idp-nonprd",
+            "emailAddress": "awsidpnonprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "788038770244",
+            "accountName": "rpa-dev",
+            "emailAddress": "awsrpadev@alliedsolutions.net"
+        },
+        {
+            "accountId": "417907113640",
+            "accountName": "cicd-prd",
+            "emailAddress": "awscicdprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "375223158452",
+            "accountName": "ocr-prd",
+            "emailAddress": "awsocrprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "209417222916",
+            "accountName": "centerpoint-stg",
+            "emailAddress": "awscenterpointstg@alliedsolutions.net"
+        },
+        {
+            "accountId": "618584612562",
+            "accountName": "accounting-dev",
+            "emailAddress": "awsaccountingdev@alliedsolutions.net"
+        },
+        {
+            "accountId": "299095907438",
+            "accountName": "unitrac-tst",
+            "emailAddress": "awsunitractst@alliedsolutions.net"
+        },
+        {
+            "accountId": "748477008506",
+            "accountName": "database-tst",
+            "emailAddress": "awsdatabasetst@alliedsolutions.net"
+        },
+        {
+            "accountId": "317478521242",
+            "accountName": "database-dev",
+            "emailAddress": "awsdatabasedev@alliedsolutions.net"
+        },
+        {
+            "accountId": "857702877126",
+            "accountName": "crm-dev",
+            "emailAddress": "awscrmdev@alliedsolutions.net"
+        },
+        {
+            "accountId": "487711034703",
+            "accountName": "unitrac-dev",
+            "emailAddress": "awsunitracdev@alliedsolutions.net"
+        },
+        {
+            "accountId": "756266159227",
+            "accountName": "unitrac-stg",
+            "emailAddress": "awsunitracstg@alliedsolutions.net"
+        },
+        {
+            "accountId": "055802656418",
+            "accountName": "surfside-tst",
+            "emailAddress": "awssurfsidetst@alliedsolutions.net"
+        },
+        {
+            "accountId": "175721525203",
+            "accountName": "claims-tst",
+            "emailAddress": "awsclaimstst@alliedsolutions.net"
+        },
+        {
+            "accountId": "930430678084",
+            "accountName": "accounting-prd",
+            "emailAddress": "awsaccountingprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "531150470010",
+            "accountName": "pims-stg",
+            "emailAddress": "awspimsstg@alliedsolutions.net"
+        },
+        {
+            "accountId": "358254232050",
+            "accountName": "crm-prd",
+            "emailAddress": "awscrmprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "305553731869",
+            "accountName": "app-shared-tst",
+            "emailAddress": "awsappsharedtst@alliedsolutions.net"
+        },
+        {
+            "accountId": "272813058053",
+            "accountName": "operations-sbx",
+            "emailAddress": "awsoperationssbx@alliedsolutions.net"
+        },
+        {
+            "accountId": "735569778130",
+            "accountName": "surfside-dev",
+            "emailAddress": "awssurfsidedev@alliedsolutions.net"
+        },
+        {
+            "accountId": "466759460982",
+            "accountName": "centerpoint-tst",
+            "emailAddress": "awscenterpointtst@alliedsolutions.net"
+        },
+        {
+            "accountId": "669194042698",
+            "accountName": "rpa-prd",
+            "emailAddress": "awsrpaprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "947296598779",
+            "accountName": "centerpoint-prd",
+            "emailAddress": "awscenterpointprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "377976452902",
+            "accountName": "ocr-tst",
+            "emailAddress": "awsocrtst@alliedsolutions.net"
+        },
+        {
+            "accountId": "375149783537",
+            "accountName": "pims-tst",
+            "emailAddress": "awspimstst@alliedsolutions.net"
+        },
+        {
+            "accountId": "295634927267",
+            "accountName": "claims-prd",
+            "emailAddress": "awsclaimsprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "840022962219",
+            "accountName": "iqq-prd",
+            "emailAddress": "awsiqqprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "566206974737",
+            "accountName": "ocr-stg",
+            "emailAddress": "awsocrstg@alliedsolutions.net"
+        },
+        {
+            "accountId": "334126123116",
+            "accountName": "ibm-tst",
+            "emailAddress": "awsibmtst@alliedsolutions.net"
+        },
+        {
+            "accountId": "792770887887",
+            "accountName": "ibm-prd",
+            "emailAddress": "awsibmprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "505911551330",
+            "accountName": "Infrastructure-Prd",
+            "emailAddress": "aws-infrastructure@alliedsolutions.net"
+        },
+        {
+            "accountId": "222874309779",
+            "accountName": "accounting-tst",
+            "emailAddress": "awsaccountingtst@alliedsolutions.net"
+        },
+        {
+            "accountId": "782180100062",
+            "accountName": "centerpoint-dev",
+            "emailAddress": "awscenterpointdev@alliedsolutions.net"
+        },
+        {
+            "accountId": "983164078172",
+            "accountName": "crm-stg",
+            "emailAddress": "awscrmstg@alliedsolutions.net"
+        },
+        {
+            "accountId": "717020254065",
+            "accountName": "idp-prd",
+            "emailAddress": "awsidpprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "297801721636",
+            "accountName": "app-shared-dev",
+            "emailAddress": "awsappshareddev@alliedsolutions.net"
+        },
+        {
+            "accountId": "644945896075",
+            "accountName": "surfside-prd",
+            "emailAddress": "awssurfsideprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "704332115241",
+            "accountName": "iqq-stg",
+            "emailAddress": "awsiqqstg@alliedsolutions.net"
+        },
+        {
+            "accountId": "376113267356",
+            "accountName": "app-shared-prd",
+            "emailAddress": "awsappsharedprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "955317286827",
+            "accountName": "infrastructure-tst",
+            "emailAddress": "awsinfrastructuretst@alliedsolutions.net"
+        },
+        {
+            "accountId": "026777069213",
+            "accountName": "accounting-stg",
+            "emailAddress": "awsaccountingstg@alliedsolutions.net"
+        },
+        {
+            "accountId": "253866213586",
+            "accountName": "unitrac-prd",
+            "emailAddress": "awsunitracprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "653720970922",
+            "accountName": "ibm-dev",
+            "emailAddress": "awsibmdev@alliedsolutions.net"
+        },
+        {
+            "accountId": "676033594762",
+            "accountName": "database-stg",
+            "emailAddress": "awsdatabasestg@alliedsolutions.net"
+        },
+        {
+            "accountId": "125147499288",
+            "accountName": "iqq-dev",
+            "emailAddress": "awsiqqdev@alliedsolutions.net"
+        },
+        {
+            "accountId": "627680202113",
+            "accountName": "infrastructure-shared-prd",
+            "emailAddress": "awsinfrastructuresharedprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "124477023820",
+            "accountName": "database-prd",
+            "emailAddress": "awsdatabaseprd@alliedsolutions.net"
+        },
+        {
+            "accountId": "426851146522",
+            "accountName": "surfside-stg",
+            "emailAddress": "awssurfsidestg@alliedsolutions.net"
+        },
+        {
+            "accountId": "663732914431",
+            "accountName": "rpa-tst",
+            "emailAddress": "awsrpatst@alliedsolutions.net"
+        },
+        {
+            "accountId": "278461599774",
+            "accountName": "crm-tst",
+            "emailAddress": "awscrmtst@alliedsolutions.net"
+        },
+        {
+            "accountId": "591656560372",
+            "accountName": "pims-dev",
+            "emailAddress": "awspimsdev@alliedsolutions.net"
+        }
+    ]
+}
