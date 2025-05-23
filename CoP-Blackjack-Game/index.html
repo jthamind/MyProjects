@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blackjack At Allied</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background: url('felt-table.png') no-repeat center center fixed; 
+            background-size: cover;
+            min-height: 100vh;
+            color: #FFD700; /* Gold color */
+            margin: 0;
+            padding-top: 50px;
+            font-family: 'Cinzel', serif; /* Applying the Cinzel font */
+        }
+        .card {
+            width: 100px;
+            height: 150px;
+            background-size: cover;
+            display: inline-block;
+        }
+        .hand {
+            margin: 10px;
+        }
+        .hand-label {
+            font-weight: bold;
+        }
+        .deck {
+            width: 100px;
+            height: 150px;
+            background-size: cover;
+            display: inline-block;
+            margin-bottom: 20px;
+            background-position: center;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            background-color: #333;
+            color: #FFD700;
+            border: 1px solid #FFD700;
+            padding: 10px;
+            font-family: 'Cinzel', serif;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        button:disabled {
+            background-color: #666;
+            color: #999;
+            border-color: #999;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blackjack At Allied</h1>
+    <div id="deck" class="deck" style="background-image: url('card-back.png');"></div>
+    <button id="start-button" onclick="initGame()">Click to Play!</button>
+    <div id="game-elements" class="hidden">
+        <div id="dealer-hand" class="hand">
+            <div class="hand-label">Dealer's Hand</div>
+        </div>
+        <div id="player-hands" class="hand"></div>
+        <div class="controls">
+            <button onclick="startGame()">Start</button>
+            <button onclick="hit()">Hit</button>
+            <button onclick="stay()">Stay</button>
+            <button onclick="split()">Split</button>
+        </div>
+    </div>
+
+    <audio id="draw-sound" src="draw.mp3" preload="auto"></audio>
+    <audio id="win-sound" src="win.mp3" preload="auto"></audio>
+
+    <script>
+        let player_hands = [[]];
+        let dealer_hand = [];
+        let deck = [];
+        let current_hand_index = 0;
+
+        function initGame() {
+            document.getElementById('start-button').classList.add('hidden');
+            document.getElementById('game-elements').classList.remove('hidden');
+            startGame();
+        }
+
+        async function startGame() {
+            const response = await fetch('https://iet3lgufxk.execute-api.us-east-1.amazonaws.com/default/blackjack_game', {
+                method: 'POST',
+                body: JSON.stringify({ action: 'start' }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                console.error('Network response was not ok', response.statusText);
+                return;
+            }
+            const data = await response.json();
+            renderGame(data);
+            enableButtons();
+        }
+
+        async function hit() {
+            const response = await fetch('https://iet3lgufxk.execute-api.us-east-1.amazonaws.com/default/blackjack_game', {
+                method: 'POST',
+                body: JSON.stringify({ action: 'hit', player_hands, dealer_hand, deck, current_hand_index }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                console.error('Network response was not ok', response.statusText);
+                return;
+            }
+            const data = await response.json();
+            renderGame(data);
+
+            // Check if player busts
+            if (data.player_values[current_hand_index] > 21) {
+                alert('Player busts! Dealer wins.');
+                disableButtons();
+            }
+        }
+
+        async function stay() {
+            const response = await fetch('https://iet3lgufxk.execute-api.us-east-1.amazonaws.com/default/blackjack_game', {
+                method: 'POST',
+                body: JSON.stringify({ action: 'stay', player_hands, dealer_hand, deck, current_hand_index }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                console.error('Network response was not ok', response.statusText);
+                return;
+            }
+            const data = await response.json();
+            renderGame(data);
+
+            if (data.current_hand_index === -1) {
+                // Display result and disable buttons
+                alert(data.result);
+                disableButtons();
+            }
+        }
+
+        async function split() {
+            const response = await fetch('https://iet3lgufxk.execute-api.us-east-1.amazonaws.com/default/blackjack_game', {
+                method: 'POST',
+                body: JSON.stringify({ action: 'split', player_hands, dealer_hand, deck, current_hand_index }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                console.error('Network response was not ok', response.statusText);
+                return;
+            }
+            const data = await response.json();
+            renderGame(data);
+        }
+
+        function renderGame(data) {
+            player_hands = data.player_hands;
+            dealer_hand = data.dealer_hand;
+            deck = data.deck;
+            current_hand_index = data.current_hand_index;
+
+            const playerHandsDiv = document.getElementById('player-hands');
+            const dealerHandDiv = document.getElementById('dealer-hand');
+
+            // Clear previous hands
+            playerHandsDiv.innerHTML = '';
+            dealerHandDiv.innerHTML = '<div class="hand-label">Dealer\'s Hand</div>';
+
+            // Display dealer's hand
+            dealer_hand.forEach(card => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'card';
+                cardElement.style.backgroundImage = `url('cards/${card.value.toLowerCase()}_of_${card.suit.toLowerCase()}.png')`;
+                dealerHandDiv.appendChild(cardElement);
+            });
+
+            // Display player's hands
+            player_hands.forEach((hand, index) => {
+                const handDiv = document.createElement('div');
+                handDiv.className = 'hand';
+                handDiv.innerHTML = `<div class="hand-label">Player's Hand ${index + 1}</div>`;
+                hand.forEach(card => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'card';
+                    cardElement.style.backgroundImage = `url('cards/${card.value.toLowerCase()}_of_${card.suit.toLowerCase()}.png')`;
+                    handDiv.appendChild(cardElement);
+                });
+                playerHandsDiv.appendChild(handDiv);
+            });
+
+            if (data.result) {
+                alert(data.result);
+                if (data.result.includes("wins")) {
+                    document.getElementById('win-sound').play();
+                }
+            } else {
+                document.getElementById('draw-sound').play();
+            }
+        }
+
+        function disableButtons() {
+            document.querySelector('button[onclick="hit()"]').disabled = true;
+            document.querySelector('button[onclick="stay()"]').disabled = true;
+            document.querySelector('button[onclick="split()"]').disabled = true;
+        }
+
+        function enableButtons() {
+            document.querySelector('button[onclick="hit()"]').disabled = false;
+            document.querySelector('button[onclick="stay()"]').disabled = false;
+            document.querySelector('button[onclick="split()"]').disabled = false;
+        }
+    </script>
+</body>
+</html>
