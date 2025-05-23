@@ -1,0 +1,23 @@
+service:
+  name: Bloodline
+  identifier: Bloodline
+  description: ""
+  tags: {}
+  serviceDefinition:
+    type: WinRm
+    spec:
+      configFiles:
+        - configFile:
+            identifier: appsettings.json
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: GitHub_App_Connector
+                  gitFetchType: Branch
+                  paths:
+                    - Eventures.WebApp/appsettings.json
+                  branch: HarnessPoC-service
+  gitOpsEnabled: false
+  orgIdentifier: default
+  projectIdentifier: default_project

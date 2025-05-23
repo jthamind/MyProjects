@@ -1,0 +1,147 @@
+pipeline:
+  name: LamentConfiguration
+  identifier: LamentConfiguration
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: GitHub_App_Connector
+        build: <+input>
+  stages:
+    - stage:
+        name: Manual Intervention
+        identifier: Manual_Intervention
+        description: ""
+        type: Approval
+        spec:
+          execution:
+            steps:
+              - step:
+                  name: Manual Intervention
+                  identifier: Manual_Intervention
+                  type: HarnessApproval
+                  timeout: 1d
+                  spec:
+                    approvalMessage: |-
+                      Please review the following information
+                      and approve the pipeline progression
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+                      userGroups:
+                        - Pinheads_Gash
+                    isAutoRejectEnabled: false
+                    approverInputs: []
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: MarkAsFailure
+    - stage:
+        name: HarnessCI
+        identifier: Suffering
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            paths: []
+          buildIntelligence:
+            enabled: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Test
+                  name: UnitTests
+                  identifier: Chatterer
+                  spec:
+                    shell: Bash
+                    command: |
+                      dotnet restore "Eventures.WebApp.UnitTests/Eventures.WebApp.UnitTests.csproj"
+                      dotnet build "Eventures.WebApp.UnitTests/Eventures.WebApp.UnitTests.csproj"
+                      dotnet test "Eventures.WebApp.UnitTests/Eventures.WebApp.UnitTests.csproj" --logger "trx;LogFileName=test-results.trx"
+                    intelligenceMode: true
+              - step:
+                  type: Run
+                  name: dotnetRestore
+                  identifier: Inferno
+                  spec:
+                    shell: Bash
+                    command: dotnet restore "Eventures.WebApp/Eventures.WebApp.csproj"
+              - step:
+                  type: Run
+                  name: dotnetBuild
+                  identifier: Hellbound
+                  spec:
+                    shell: Bash
+                    command: |-
+                      dotnet build "Eventures.WebApp/Eventures.WebApp.csproj" -c Release
+                      dotnet publish "Eventures.WebApp/Eventures.WebApp.csproj" -c Release -o /home/vagrant/publish
+        failureStrategies:
+          - onFailure:
+              errors: []
+              action:
+                type: MarkAsFailure
+    - stage:
+        name: HarnessCD
+        identifier: Threshold
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: WinRm
+          service:
+            serviceRef: Bloodline
+            gitBranch: HarnessPoC-service
+          environment:
+            environmentRef: Morocco
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: Morocco
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: Heckraiser
+                  identifier: Heckraiser
+                  spec:
+                    shell: PowerShell
+                    executionTarget:
+                      host: 10.0.0.148
+                      connectorRef: account.WinRMAccess
+                      workingDirectory: C:\Deployments
+                    source:
+                      type: Harness
+                      spec:
+                        script: ""
+                        file: /WindowsDeployment
+                    environmentVariables: []
+                    outputVariables: []
+                    outputAlias:
+                      scope: Pipeline
+                      key: gashes
+                  timeout: 10m
+            rollbackSteps: []
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: PipelineRollback
+        when:
+          pipelineStatus: Success
+  delegateSelectors:
+    - docker-delegate
+  allowStageExecutions: true
