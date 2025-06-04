@@ -1,0 +1,155 @@
+---
+- name: Install and configure Octopus Deploy Tentacle
+  hosts: all
+  gather_facts: no
+
+  vars_files:
+    - ../group_vars/windows.yml
+
+  vars:
+    # where your package zip landed
+    install_files_dir: "E:\\InstallFiles"
+
+    # path to the tentacle MSI in your install_files folder
+    tentacle_msi: "{{ install_files_dir }}\\Octopus.Tentacle.8.3.2905-x64.msi"
+
+    # where Tentacle.exe lives once installed
+    tentacle_bin_dir: "C:\\Program Files\\Octopus Deploy\\Tentacle"
+
+    # where the instance config will live
+    tentacle_config_path: "E:\\Octopus\\Tentacle.config"
+
+    # base "home" for Tentacle
+    tentacle_home: "E:\\Octopus"
+    tentacle_app_dir: "{{ tentacle_home }}\\Applications"
+
+  tasks:
+    - name: Install Octopus Tentacle MSI
+      win_package:
+        path: "{{ tentacle_msi }}"
+        state: present
+      register: tentacle_install
+
+    - name: Check if Tentacle.exe is on-disk
+      win_stat:
+        path: "{{ tentacle_bin_dir }}\\Tentacle.exe"
+      register: tentacle_exe
+
+    - name: Check if Tentacle instance already configured
+      win_stat:
+        path: "{{ tentacle_config_path }}"
+      register: tentacle_config
+
+    - name: Create Tentacle instance (if not already created)
+      win_command: >
+        "{{ tentacle_bin_dir }}\\Tentacle.exe" create-instance
+        --instance "Tentacle"
+        --config "{{ tentacle_config_path }}"
+        --console
+      args:
+        chdir: "{{ tentacle_bin_dir }}"
+      when:
+        - tentacle_exe.stat.exists
+        - not tentacle_config.stat.exists
+      register: create_inst
+      no_log: true
+
+    - name: Generate certificate if none exists
+      win_command: >
+        "{{ tentacle_bin_dir }}\\Tentacle.exe" new-certificate
+        --instance "Tentacle"
+        --if-blank
+        --console
+      args:
+        chdir: "{{ tentacle_bin_dir }}"
+      when: tentacle_exe.stat.exists
+
+    - name: Reset trust (allow thumbprint reconfigure)
+      win_command: >
+        "{{ tentacle_bin_dir }}\\Tentacle.exe" configure
+        --instance "Tentacle"
+        --reset-trust
+        --console
+      args:
+        chdir: "{{ tentacle_bin_dir }}"
+      when: tentacle_exe.stat.exists
+
+    - name: Configure home, apps directory & port
+      win_command: >
+        "{{ tentacle_bin_dir }}\\Tentacle.exe" configure
+        --instance "Tentacle"
+        --home "{{ tentacle_home }}"
+        --app "{{ tentacle_app_dir }}"
+        --port "{{ tentacle_port }}"
+        --console
+      args:
+        chdir: "{{ tentacle_bin_dir }}"
+      when: tentacle_exe.stat.exists
+
+    - name: Trust Octopus Server thumbprint
+      win_command: >
+        "{{ tentacle_bin_dir }}\\Tentacle.exe" configure
+        --instance "Tentacle"
+        --trust "{{ octopus_thumbprint }}"
+        --console
+      args:
+        chdir: "{{ tentacle_bin_dir }}"
+      when: tentacle_exe.stat.exists
+
+    - name: Ensure firewall rule exists for Tentacle port
+      community.windows.win_firewall_rule:
+        name: "Octopus Deploy Tentacle"
+        localport: "{{ tentacle_port }}"
+        action: allow
+        direction: in
+        protocol: tcp
+        enabled: yes
+        state: present
+
+    - name: Import Root CA to Trusted Root store
+      win_certificate_store:
+        path: "{{ install_files_dir }}\\root.cer"
+        store_name: Root
+        store_location: LocalMachine
+        state: present
+
+    - name: Import Intermediate CA to Intermediate store
+      win_certificate_store:
+        path: "{{ install_files_dir }}\\intermediate.cer"
+        store_name: CA
+        store_location: LocalMachine
+        state: present
+
+    - name: Register Tentacle with Octopus Server (Listening Mode)
+      win_command: >
+        "{{ tentacle_bin_dir }}\\Tentacle.exe" register-with
+        --instance "Tentacle"
+        --server "{{ octopus_server_url }}"
+        --apiKey "{{ octopus_api_key }}"
+        --role "{{ octopus_roles }}"
+        --environment "{{ octopus_environment }}"
+        --comms-style TentaclePassive
+        --console
+      args:
+        chdir: "{{ tentacle_bin_dir }}"
+      when:
+        - tentacle_exe.stat.exists
+        - tentacle_config.stat.exists
+      register: register_output
+      failed_when: register_output.rc != 0 and "'register-with'" in register_output.cmd
+
+    - name: Install and start Tentacle service
+      win_command: >
+        "{{ tentacle_bin_dir }}\\Tentacle.exe" service
+        --instance "Tentacle"
+        --install
+        --start
+        --console
+      args:
+        chdir: "{{ tentacle_bin_dir }}"
+      when: tentacle_exe.stat.exists
+
+    - name: 🎉 Tentacle setup completed successfully
+      debug:
+        msg: "Octopus Tentacle is installed, configured, and listening on port {{ tentacle_port }}."
+

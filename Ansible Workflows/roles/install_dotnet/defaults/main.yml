@@ -1,0 +1,38 @@
+---
+# Base directory for all install files on the Windows hosts:
+install_files_dir: "E:\\InstallFiles"
+
+# List of .NET packages to install (name, path to installer, and registry‐matching pattern):
+dotnet_packages:
+  - name: ".NET Core 2.0.9 Hosting Bundle"
+    exe: "{{ install_files_dir }}\\DotNetCore.2.0.9-WindowsHosting.exe"
+    regmatch: '2.0.9'
+
+  - name: ".NET Hosting Bundle 2.1.30"
+    exe: "{{ install_files_dir }}\\dotnet-hosting-2.1.30-win.exe"
+    regmatch: '2.1.30'
+
+  - name: ".NET Hosting Bundle 2.2.8"
+    exe: "{{ install_files_dir }}\\dotnet-hosting-2.2.8-win.exe"
+    regmatch: '2.2.8'
+
+  - name: ".NET Hosting Bundle 3.1.32"
+    exe: "{{ install_files_dir }}\\dotnet-hosting-3.1.32-win.exe"
+    regmatch: '3.1.32'
+
+  - name: "Windows Desktop Runtime 3.1.32"
+    exe: "{{ install_files_dir }}\\windowsdesktop-runtime-3.1.32-win-x64.exe"
+    regmatch: 'Desktop Runtime.*3.1.32'
+
+  - name: ".NET Hosting Bundle 6.0.8"
+    exe: "{{ install_files_dir }}\\dotnet-hosting-6.0.8-win.exe"
+    regmatch: '6.0.8'
+
+  - name: ".NET SDK 2.2.204"
+    exe: "{{ install_files_dir }}\\dotnet-sdk-2.2.204-win-x64.exe"
+    regmatch: 'SDK.*2.2.204'
+
+  - name: ".NET SDK 3.1.100"
+    exe: "{{ install_files_dir }}\\dotnet-sdk-3.1.100-win-x64.exe"
+    regmatch: 'SDK.*3.1.100'
+

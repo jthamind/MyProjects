@@ -1,0 +1,73 @@
+---
+- name: Create Scheduled Tasks
+  hosts: windows
+  gather_facts: yes
+  vars_files:
+    - ../group_vars/windows.yml
+
+  tasks:
+    - name: Check if IIS Log Cleanup task already exists
+      community.windows.win_scheduled_task_stat:
+        name: IIS Log Cleanup
+      register: task_status
+      failed_when: false
+      
+    - name: Get next Saturday at 3:30 AM from localhost
+      delegate_to: localhost
+      run_once: true
+      set_fact:
+        next_saturday: "{{ lookup('pipe', 'python3 scripts/next_saturday_3_30.py') }}"
+      when: not task_status.task_exists
+
+    - name: Fail if next_saturday could not be calculated
+      fail:
+        msg: "❌ Failed to calculate next Saturday at 3:30 AM."
+      when:
+        - not task_status.task_exists
+        - next_saturday is not defined or next_saturday == ""
+      delegate_to: localhost
+      run_once: true
+
+    - name: Show calculated next Saturday
+      debug:
+        msg: "➡️ Next Saturday at 3:30 AM: {{ next_saturday }}"
+      when: next_saturday is defined
+
+    - name: Show scheduled task creation status
+      debug:
+        msg: "✅ Scheduled task already exists, skipping creation."
+      when: task_status.task_exists
+
+    - name: Check if IISLogFileCleanup.ps1 script exists
+      win_stat:
+        path: E:\AdminAppFiles\ScheduledTaskScripts\IISlogFileCleanup.ps1
+      register: cleanup_script
+      when: not task_status.task_exists
+
+    - name: Fail if cleanup script is missing
+      fail:
+        msg: "❌ Cannot create scheduled task. Script not found at E:\\AdminAppFiles\\ScheduledTaskScripts\\IISlogFileCleanup.ps1"
+      when:
+        - not cleanup_script.stat.exists
+        - not task_status.task_exists
+
+    - name: Create IIS Log Cleanup scheduled task
+      win_scheduled_task:
+        name: IIS Log Cleanup
+        description: Deletes old IIS log files weekly
+        actions:
+          - path: powershell.exe
+            arguments: -file "E:\AdminAppFiles\ScheduledTaskScripts\IISlogFileCleanup.ps1"
+        triggers:
+          - type: weekly
+            days_of_week:
+              - Saturday
+            start_boundary: "{{ next_saturday }}"
+        username: "{{ schedtask_username }}"
+        password: "{{ schedtask_password }}"
+        run_level: highest
+        logon_type: password
+        state: present
+        enabled: true
+        compatibility: 6
+      when: not task_status.task_exists

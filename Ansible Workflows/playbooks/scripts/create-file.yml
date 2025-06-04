@@ -1,0 +1,11 @@
+---
+- name: Create ansible-test.txt on E drive
+  hosts: cp_web_svc
+  gather_facts: false
+
+  tasks:
+    - name: Create ansible-test.txt with Success! inside
+      win_copy:
+        content: "Success!"
+        dest: 'E:\ansible-test.txt'
+

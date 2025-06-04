@@ -1,0 +1,38 @@
+---
+- name: Install TreeSize silently with license key
+  win_package:
+    path: 'E:\InstallFiles\TreeSize\TreeSize-x64-Full.exe'
+    arguments: '/VERYSILENT /NORESTART /SUPPRESSMSGBOXES /ACCEPTLICENSE /PASSWORD={{ treesize_license_key }}'
+    product_id: TreeSize_is1
+    state: present
+  tags:
+    - install_utilities
+    - treesize_install
+
+- name: Check if URL Rewrite Module is installed
+  win_reg_stat:
+    path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\IIS URL Rewrite Module 2'
+  register: url_rewrite_reg
+  tags:
+    - install_utilities
+    - url_rewrite_check
+
+- name: Install IIS URL Rewrite Module via msiexec
+  win_shell: |
+    Start-Process msiexec.exe `
+      -ArgumentList '/i E:\InstallFiles\rewrite_amd64_en-US.msi ALLUSERS=1 /quiet /norestart' `
+      -Wait -NoNewWindow
+  args:
+    executable: PowerShell.exe
+  when: not url_rewrite_reg.exists
+  tags:
+    - install_utilities
+    - url_rewrite_install
+
+- name: Debug URL Rewrite install status
+  debug:
+    msg: "✅ URL Rewrite Module installed (or already present)."
+  when: url_rewrite_reg.exists or url_rewrite_reg is not defined
+  tags:
+    - install_utilities
+    - url_rewrite_install

@@ -1,0 +1,40 @@
+---
+- name: Check installed .NET versions in registry
+  win_command: >-
+    powershell -Command "Get-ItemProperty 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*' |
+    Where-Object { $_.DisplayName } |
+    Select-Object -ExpandProperty DisplayName"
+  register: installed_dotnet_versions
+  changed_when: false
+  tags:
+    - install_dotnet
+    - dotnet_check
+
+- name: Install missing .NET bundles
+  win_package:
+    path: "{{ item.exe }}"
+    arguments: /quiet /norestart
+    state: present
+  loop: "{{ dotnet_packages }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: >
+    installed_dotnet_versions.stdout_lines is defined and
+    installed_dotnet_versions.stdout_lines | select('search', item.regmatch) | length == 0
+  tags:
+    - install_dotnet
+    - dotnet_install
+
+- name: Debug - Confirm skipped installations
+  debug:
+    msg: "✅ {{ item.name }} is already installed."
+  loop: "{{ dotnet_packages }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: >
+    installed_dotnet_versions.stdout_lines is defined and
+    installed_dotnet_versions.stdout_lines | select('search', item.regmatch) | length > 0
+  tags:
+    - install_dotnet
+    - dotnet_install
+

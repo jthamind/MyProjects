@@ -1,0 +1,123 @@
+---
+- name: Check if IIS Log Cleanup task already exists
+  community.windows.win_scheduled_task_stat:
+    name: IIS Log Cleanup
+  register: task_status
+  failed_when: false
+  changed_when: false
+  tags:
+    - schedule_tasks
+    - check_task
+
+- name: Determine if IIS Log Cleanup task exists
+  set_fact:
+    task_exists: "{{ task_status.actions is defined }}"
+  tags:
+    - schedule_tasks
+    - set_fact
+
+- name: Calculate next Saturday at 3:30 AM (system time)
+  delegate_to: localhost
+  run_once: true
+  when: not task_exists
+  set_fact:
+    next_saturday: "{{ lookup('pipe', 'python3 scripts/next_saturday_3_30.py') }}"
+  tags:
+    - schedule_tasks
+    - calc_next
+
+- name: Fail if next_saturday could not be calculated
+  delegate_to: localhost
+  run_once: true
+  fail:
+    msg: "❌ Failed to calculate next Saturday at 3:30 AM."
+  when:
+    - not task_exists
+    - next_saturday is not defined or next_saturday | length == 0
+  tags:
+    - schedule_tasks
+    - fail_calc
+
+- name: Debug next Saturday value
+  debug:
+    msg: "Next Saturday at 3:30 AM: {{ next_saturday }}"
+  when: next_saturday is defined
+  tags:
+    - schedule_tasks
+    - debug_next
+
+- name: Check if IISlogFileCleanup.ps1 exists in ScheduledTaskScripts
+  win_stat:
+    path: "E:\\AdminAppFiles\\ScheduledTaskScripts\\IISlogFileCleanup.ps1"
+  register: cleanup_script
+  tags:
+    - schedule_tasks
+    - check_script
+
+- name: Copy IISlogFileCleanup.ps1 into ScheduledTaskScripts (if missing)
+  win_copy:
+    src: "E:\\InstallFiles\\ScheduledTaskScripts\\IISlogFileCleanup.ps1"
+    dest: "E:\\AdminAppFiles\\ScheduledTaskScripts\\IISlogFileCleanup.ps1"
+    remote_src: yes
+  when: not cleanup_script.stat.exists
+  register: copy_script
+  tags:
+    - schedule_tasks
+    - copy_script
+
+- name: Fail if cleanup script is missing
+  fail:
+    msg: "❌ Cannot create scheduled task. Script not found at E:\\AdminAppFiles\\ScheduledTaskScripts\\IISlogFileCleanup.ps1"
+  when:
+    - not task_exists
+    - not cleanup_script.stat.exists
+    - copy_script is not defined or copy_script.changed == false
+  tags:
+    - schedule_tasks
+    - fail_script
+
+- name: Create IIS Log Cleanup scheduled task
+  community.windows.win_scheduled_task:
+    name: IIS Log Cleanup
+    description: Deletes old IIS log files weekly
+    actions:
+      - path: powershell.exe
+        arguments: -file "E:\\AdminAppFiles\\ScheduledTaskScripts\\IISlogFileCleanup.ps1"
+    triggers:
+      - type: weekly
+        days_of_week:
+          - Saturday
+        weeks_interval: 1
+        start_boundary: "{{ next_saturday }}"
+    username: "{{ schedtask_username }}"
+    password: "{{ schedtask_password }}"
+    run_level: highest
+    logon_type: password
+    update_password: false
+    state: present
+    enabled: true
+    compatibility: 6
+  when: not task_exists
+  register: task_create
+  tags:
+    - schedule_tasks
+    - create_task
+
+- name: Confirm scheduled task created
+  debug:
+    msg: "✅ IIS Log Cleanup task created and scheduled for {{ next_saturday }}."
+  when:
+    - not task_exists
+    - task_create.changed
+  tags:
+    - schedule_tasks
+    - confirm
+
+- name: Task already exists – skipping creation
+  debug:
+    msg: "ℹ️ IIS Log Cleanup scheduled task already exists. Skipping creation."
+  when: task_exists
+  tags:
+    - schedule_tasks
+    - skip
+

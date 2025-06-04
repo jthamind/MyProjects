@@ -1,0 +1,69 @@
+---
+- name: Create E:\ folders on Windows Server and transfer install files
+  hosts: all
+  gather_facts: no
+
+  vars:
+    local_zip: "{{ playbook_dir }}/../files/install_files.zip"
+    remote_dir: "E:\\InstallFiles"
+    remote_zip: "{{ remote_dir }}\\install_files.zip"
+    marker_file: "{{ remote_dir }}\\.install_files_unzipped"
+
+  tasks:
+    - name: Ensure E:\AdminAppFiles exists
+      win_file:
+        path: "E:\\AdminAppFiles"
+        state: directory
+
+    - name: Ensure E:\AppBackups exists
+      win_file:
+        path: "E:\\AppBackups"
+        state: directory
+
+    - name: Ensure E:\InstallFiles exists
+      win_file:
+        path: "{{ remote_dir }}"
+        state: directory
+
+    - name: Ensure E:\AdminAppFiles\ScheduledTaskScripts exists
+      win_file:
+        path: "E:\\AdminAppFiles\\ScheduledTaskScripts"
+        state: directory
+
+    - name: Transfer & extract install files if needed
+      block:
+        - name: Check for unpack marker
+          win_stat:
+            path: "{{ marker_file }}"
+          register: marker_stat
+
+        - name: Copy install_files.zip to remote
+          win_copy:
+            src: "{{ local_zip }}"
+            dest: "{{ remote_zip }}"
+            checksum: yes
+          when: not marker_stat.stat.exists
+
+        - name: Unzip install_files.zip
+          win_unzip:
+            src: "{{ remote_zip }}"
+            dest: "{{ remote_dir }}"
+          register: unzip_result
+          when: not marker_stat.stat.exists
+
+        - name: Create unpack marker file
+          win_file:
+            path: "{{ marker_file }}"
+            state: touch
+          when: unzip_result.changed
+
+      rescue:
+        - name: Report transfer/unzip failure
+          win_shell: |
+            Write-Error "❌ Failed to transfer or unzip install files on {{ inventory_hostname }}"
+
+    - name: Clean up remote ZIP file
+      win_file:
+        path: "{{ remote_zip }}"
+        state: absent
+
