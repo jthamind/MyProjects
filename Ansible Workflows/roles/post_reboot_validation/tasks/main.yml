@@ -1,0 +1,148 @@
+---
+- name: Confirm system PATH includes Notepad++ and Neovim
+  win_command: powershell -Command "[Environment]::GetEnvironmentVariable('Path', 'Machine')"
+  register: path_check
+  tags:
+    - post_reboot_validation
+    - check_path
+
+- name: Fail if Notepad++ path not in PATH
+  fail:
+    msg: "❌ Notepad++ path missing from system PATH."
+  when: "'Notepad++' not in path_check.stdout"
+  tags:
+    - post_reboot_validation
+    - fail_notepadpp_path
+
+- name: Fail if Neovim path not in PATH
+  fail:
+    msg: "❌ Neovim path missing from system PATH."
+  when: "'nvim-win64' not in path_check.stdout"
+  tags:
+    - post_reboot_validation
+    - fail_neovim_path
+
+- name: Check if Notepad++ is in PATH
+  win_command: where "notepad++"
+  register: notepad_check
+  failed_when: notepad_check.rc != 0
+  tags:
+    - post_reboot_validation
+    - check_notepadpp
+
+- name: Check if Neovim is in PATH
+  win_command: where "nvim"
+  register: nvim_check
+  failed_when: nvim_check.rc != 0
+  tags:
+    - post_reboot_validation
+    - check_neovim
+
+- name: Check if IIS Log Cleanup scheduled task exists
+  community.windows.win_scheduled_task_stat:
+    name: IIS Log Cleanup
+  register: sched_task_check
+  tags:
+    - post_reboot_validation
+    - check_scheduled_task
+
+- name: Fail if scheduled task is missing or disabled
+  fail:
+    msg: "❌ Scheduled task 'IIS Log Cleanup' missing or disabled."
+  when: not sched_task_check.task_exists or not sched_task_check.settings.enabled
+  tags:
+    - post_reboot_validation
+    - fail_scheduled_task
+
+- name: Ensure W3SVC (IIS Web Server) is running
+  win_service:
+    name: W3SVC
+    state: started
+  tags:
+    - post_reboot_validation
+    - service_iis
+
+- name: Ensure AppHostSvc (Application Host Helper) is running
+  win_service:
+    name: AppHostSvc
+    state: started
+  tags:
+    - post_reboot_validation
+    - service_apphost
+
+- name: Search for TreeSize executable
+  win_find:
+    paths:
+      - 'C:\Program Files'
+      - 'C:\Program Files (x86)'
+    patterns:
+      - TreeSize.exe
+    recurse: true
+  register: treesize_files
+  tags:
+    - post_reboot_validation
+    - find_treesize
+
+- name: Warn if TreeSize executable not found
+  debug:
+    msg: "⚠️ TreeSize does not appear to be installed."
+  when: treesize_files.matched == 0
+  tags:
+    - post_reboot_validation
+    - warn_treesize
+
+- name: Check for .NET Core Hosting Bundle 6.0.8
+  win_command: >
+    powershell -Command "Get-WmiObject -Class Win32_Product |
+    Where-Object { $_.Name -like '*6.0.8*' -and $_.Name -like '*Hosting*' }"
+  register: dotnet_bundle_check
+  tags:
+    - post_reboot_validation
+    - check_dotnet_bundle
+
+- name: Fail if .NET Hosting Bundle 6.0.8 not found
+  fail:
+    msg: "❌ .NET Hosting Bundle 6.0.8 not found."
+  when: dotnet_bundle_check.stdout_lines | length == 0
+  tags:
+    - post_reboot_validation
+    - fail_dotnet_bundle
+
+- name: Confirm WinRM command response
+  win_command: hostname
+  register: winrm_test
+  tags:
+    - post_reboot_validation
+    - check_winrm
+
+- name: Fail if WinRM hostname check fails
+  fail:
+    msg: "❌ WinRM may be unresponsive."
+  when: winrm_test.rc != 0
+  tags:
+    - post_reboot_validation
+    - fail_winrm
+
+- name: Ensure Octopus Deploy Tentacle service is installed and running
+  win_service:
+    name: 'OctopusDeploy Tentacle'
+    state: started
+  register: tentacle_svc
+  tags:
+    - post_reboot_validation
+    - service_tentacle
+
+- name: Fail if Tentacle service was not found
+  fail:
+    msg: "❌ Octopus Deploy Tentacle service is not installed or failed to start."
+  when: tentacle_svc.state is not defined or tentacle_svc.state != 'running'
+  tags:
+    - post_reboot_validation
+    - fail_tentacle_service
+
+- name: ✅ Post-reboot validation complete!
+  debug:
+    msg: "✅ All system validations passed successfully."
+  tags:
+    - post_reboot_validation
+    - complete

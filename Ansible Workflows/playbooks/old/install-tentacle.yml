@@ -1,0 +1,57 @@
+---
+- name: Install and configure Octopus Deploy Tentacle
+  hosts: all
+  gather_facts: yes
+  collections:
+    community.windows
+
+  tasks:
+    # Due to a bug in the win_psmodule module, NuGet is not automatically installed
+    - name: Check for NuGet package provider
+      ansible.windows.win_powershell:
+        script: |
+          $nugetProvider = Get-PackageProvider Nuget -ListAvailable -ErrorAction SilentlyContinue
+          if ($nugetProvider) {
+            $Ansible.Changed = $false
+            Write-Verbose "Nuget is installed."
+            return $true
+          }
+          else {
+            Find-PackageProvider -Name Nuget -ForceBootstrap -IncludeDependencies -Force
+            return $false
+          }
+
+    # Install and use Octopus DSC module to configure the Tentacle agent
+    - name: Install Octopus DSC Module
+      win_psmodule:
+        name: OctopusDSC
+        state: present
+        force: true
+        skip_publisher_check: true
+
+    - name: Configure Octopus Tentacle using DSC
+      win_dsc:
+        resource_name: cTentacleAgent
+        Name: Tentacle
+        DisplayName: '{{ inventory_hostname }}'
+        TentacleServiceCredential_username: '{{ octopus_tentacle_username }}'
+        TentacleServiceCredential_password: '{{ octopus_tentacle_password }}'
+        TentacleHomeDirectory: '{{ octopus_path }}'
+        Ensure: present
+        State: started
+        TentacleDownloadUrl: 'https://octopus.com/downloads/latest/OctopusTentacle64'
+        ApiKey: '{{ octopus_api_key }}'
+        OctopusServerUrl: '{{ octopus_server_url }}'
+        ListenPort: 10933
+        DefaultApplicationDirectory: '{{ octopus_path }}\\Applications'
+        Roles: '{{ octopus_roles }}'
+        Environments: '{{ octopus_environment }}'
+        PublicHostNameConfiguration: 'FQDN'
+
+    # Add Octopus Tentacle user to local Administrator group
+    - name: Add OctopusDeploy user to local Administrator group
+      win_group_membership:
+        name: Administrators
+        members:
+          - 'ELDREDGE_A\OctopusDeploy'
+        state: present
