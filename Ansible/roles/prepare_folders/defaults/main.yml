@@ -1,5 +1,0 @@
----
-remote_dir: "E:\\InstallFiles"
-remote_zip: "{{ remote_dir }}\\install_files.zip"
-local_zip: "{{ playbook_dir }}/../files/install_files.zip"
-marker_file: "{{ remote_dir }}\\.install_files_unzipped"
